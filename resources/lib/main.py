@@ -8,29 +8,41 @@ from codequick import Route, run, Script, Resolver, Listitem
 
 @Route.register
 def root(_):
+    yield Listitem.search(
+        Route.ref("/resources/lib/main:list_collection"), url="search"
+    )
     yield from builder.build_menu()
 
 
 @Route.register
 def list_collection(_, **kwargs):
-    if "country" in kwargs:
-        page = api.get_collection(kwargs.get("country"), kwargs.get("page"))
+    if kwargs.get("search_query", False):
+        keyword = kwargs.get("search_query")
+        page = api.get_search_response(keyword, kwargs.get("page", 1))
         yield from builder.build_collection(page.get("response"))
+
         if page.get("more"):
-            kwargs["page"] += 1
+            kwargs["page"] = kwargs.get("page", 1) + 1
             yield Listitem.next_page(**kwargs)
     else:
-        return False
+        if "country" in kwargs:
+            page = api.get_collection(kwargs.get("country"), kwargs.get("page", 1))
+            yield from builder.build_collection(page.get("response"))
+            if page.get("more"):
+                kwargs["page"] = kwargs.get("page", 1) + 1
+                yield Listitem.next_page(**kwargs)
+        else:
+            return False
 
 
 @Route.register
 def list_episodes(_, **kwargs):
     if "id" in kwargs:
-        page = api.get_episodes(kwargs.get("id"), kwargs.get("page"))
+        page = api.get_episodes(kwargs.get("id"), kwargs.get("page", 1))
         yield from builder.build_episodes(page.get("response"))
 
         if page.get("more"):
-            kwargs["page"] += 1
+            kwargs["page"] = kwargs.get("page", 1) + 1
             yield Listitem.next_page(**kwargs)
     else:
         return False

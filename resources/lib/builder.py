@@ -15,7 +15,7 @@ class Builder:
             item_data = {
                 "callback": Route.ref("/resources/lib/main:list_collection"),
                 "label": item_name,
-                "params": {"country": country, "page": 1},
+                "params": {"country": country},
             }
             item = Listitem.from_dict(**item_data)
             item.art.local_thumb(image)
@@ -43,7 +43,7 @@ class Builder:
                 "country": deep_get(item, "origin.country"),
                 "aired": item.get("created_at"),
             },
-            "params": {"id": item.get("id"), "page": 1},
+            "params": {"id": item.get("id")},
         }
         yield Listitem.from_dict(**item_data)
 

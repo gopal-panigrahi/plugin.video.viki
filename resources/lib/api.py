@@ -27,6 +27,20 @@ class VikiApi:
         resp = self.get(url)
         return resp
 
+    def get_search_response(self, keyword, page):
+        url = url_constructor(URLS.get("SEARCH"))
+        params = {
+            "term": keyword,
+            "page": page,
+            "per_page": 24,
+            "with_paging": False,
+            "blocked": True,
+            "app": "100000a",
+        }
+        url = update_query_params(url, params)
+        resp = self.get(url)
+        return resp
+
     def get_episodes(self, id, page):
         url = url_constructor(URLS.get("EPISODES")).format(id=id)
         params = {

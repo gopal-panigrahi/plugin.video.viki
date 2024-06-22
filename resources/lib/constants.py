@@ -33,6 +33,7 @@ MAIN_MENU = [
 ]
 
 URLS = {
+    "SEARCH": "search.json",
     "CONTAINER": "containers.json",
     "EPISODES": "series/{id}/episodes.json",
     "MOVIE": "films/{id}/movies.json",
