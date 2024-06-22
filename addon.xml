@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.video.viki" version="1.0.0" name="Viki" provider-name="Vàjrà">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.codequick" version="1.0.3" />
+		<import addon="script.module.inputstreamhelper" version="0.6.1" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Viki is a global TV site and the ultimate destination for K-Drama and Asian entertainment.</summary>
+		<description>Viki is a free, ad-supported video streaming service.</description>
+		<platform>all</platform>
+		<website>https://www.viki.com/</website>
+		<disclaimer>This 3rd party addon is not in any way commissioned or endorsed by Viki.com</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+		</assets>
+	</extension>
+</addon>
